@@ -136,32 +136,32 @@ jlink {
 }
 
 tasks.register('buildExeForWindows', GradleBuild) {
-    group = "build"
-    startParameter.projectProperties = ['ARGS':'-PinstallerType=exe']
+    group = "release"
+    startParameter.projectProperties = ['installerType':'exe']
     tasks = ['jpackage']
 }
 
 tasks.register('buildMsiForWindows', GradleBuild) {
-    group = "build"
-    startParameter.projectProperties = ['ARGS':'-PinstallerType=msi']
+    group = "release"
+    startParameter.projectProperties = ['installerType':'msi']
     tasks = ['jpackage']
 }
 
 tasks.register('buildDebForLinux', GradleBuild) {
-    group = "build"
-    startParameter.projectProperties = ['ARGS':'-PinstallerType=deb']
+    group = "release"
+    startParameter.projectProperties = ['installerType':'deb']
     tasks = ['jpackage']
 }
 
 tasks.register('buildRpmForLinux', GradleBuild) {
-    group = "build"
-    startParameter.projectProperties = ['ARGS':'-PinstallerType=rpm']
+    group = "release"
+    startParameter.projectProperties = ['installerType':'rpm']
     tasks = ['jpackage']
 }
 
 tasks.register('buildDmgForMacOS', GradleBuild) {
-    group = "build"
-    startParameter.projectProperties = ['ARGS':'-PinstallerType=dmg']
+    group = "release"
+    startParameter.projectProperties = ['installerType':'dmg']
     tasks = ['jpackage']
 }
 
