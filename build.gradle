@@ -124,7 +124,7 @@ jlink {
             ]
         }
         if (installerType == 'dmg') {//https://codetinkering.com/how-to-use-jpackage-tool-cli-for-macos-apps/
-            imageOptions += ['--icon', 'src/main/resources/myapp/goblin.icns']
+            imageOptions += ['--icon', 'src/main/resources/myapp/icon.icns']
             installerOptions += [
                     '--name', 'MyApp',
                     '--description', project.description,
