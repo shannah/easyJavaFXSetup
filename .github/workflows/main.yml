@@ -17,11 +17,15 @@ jobs:
           java-version: '21'
       - name: Build EXE
         run: ./gradlew buildExeForWindows
-      - name: Upload EXE artifact
+      - name: Compile .ISS to .EXE Installer
+        uses: Minionguyjpro/Inno-Setup-Action@v1.2.5
+        with:
+          path: installScript.iss
+      - name: Upload Installer artifact
         uses: actions/upload-artifact@v4
         with:
-          name: myapp-exe-windows
-          path: build/jpackage/*.exe
+          name: myapp-installer
+          path: build/innosetup/*.exe
 
   buildMsiForWindows:
     runs-on: windows-latest
@@ -39,21 +43,6 @@ jobs:
         with:
           name: myapp-msi-windows
           path: build/jpackage/*.msi
-
-  buildInnoSetup:
-    needs: [buildExeForWindows, buildMsiForWindows]
-    runs-on: windows-latest
-    steps:
-      - uses: actions/checkout@v4
-      - name: Compile .ISS to .EXE Installer
-        uses: Minionguyjpro/Inno-Setup-Action@v1.2.5
-        with:
-          path: installScript.iss
-      - name: Upload Installer artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: myapp-installer
-          path: build/innosetup/*.exe
 
   buildDebForLinux:
     runs-on: ubuntu-latest
@@ -113,7 +102,7 @@ jobs:
           path: build/jpackage/*.dmg
 
   release:
-    needs: [buildExeForWindows, buildMsiForWindows, buildInnoSetup, buildDebForLinux, buildRpmForLinux, buildDmgForMacOS]
+    needs: [buildExeForWindows, buildMsiForWindows, buildDebForLinux, buildRpmForLinux, buildDmgForMacOS]
     runs-on: ubuntu-latest
     steps:
       - name: Download all artifacts
