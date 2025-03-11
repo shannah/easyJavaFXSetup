@@ -8,6 +8,7 @@ import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextArea;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
+import myapp.App;
 import myapp.services.LocaleService;
 import myapp.services.UserSettingsService;
 import org.tinylog.Logger;
@@ -55,6 +56,7 @@ public class MainController implements Initializable {
         localChoiceBox.valueProperty().addListener((e,o,n)-> {
             LocaleService.setLocale(n);
             load(stage);
+            App.updateAppWindowTitle(stage);
         });
     }
 

@@ -5,7 +5,10 @@
 
 ## 🚀 Main Features
 - **JavaFX Framework**: A robust base for building a smooth and modern UI.
-- **Built-in User settings**:
+- **Persistence of user settings** : 
+  - Window position on the screen
+  - Theme used
+  - Text input
 - **Built-in Themes**:
     - 🌙 Dark Mode
     - ☀️ Light Mode
