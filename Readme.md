@@ -3,6 +3,10 @@
 ## 🎯 Objective
 **MyApp** is a demo project designed to provide a solid foundation for modern JavaFX applications. It includes all the essential configurations to simplify development, theme management, and multi-platform distribution.
 
+![img.png](images%2Fimg.png "screenshot")
+
+
+![img_fr.png](images%2Fimg_fr.png "screenshot fr")
 ## 🚀 Main Features
 - **JavaFX Framework**: A robust base for building a smooth and modern UI.
 - **Persistence of user settings** : 
