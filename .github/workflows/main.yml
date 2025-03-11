@@ -20,8 +20,8 @@ jobs:
       - name: Upload EXE artifact
         uses: actions/upload-artifact@v4
         with:
-          name: exe-windows
-          path: build/libs/*.exe
+          name: myapp-exe-windows
+          path: build/jpackage/*.exe
 
   buildMsiForWindows:
     runs-on: windows-latest
@@ -37,8 +37,23 @@ jobs:
       - name: Upload MSI artifact
         uses: actions/upload-artifact@v4
         with:
-          name: msi-windows
-          path: build/libs/*.msi
+          name: myapp-msi-windows
+          path: build/jpackage/*.msi
+
+  buildInnoSetup:
+    needs: [buildExeForWindows, buildMsiForWindows]
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Compile .ISS to .EXE Installer
+        uses: Minionguyjpro/Inno-Setup-Action@v1.2.5
+        with:
+          path: installScript.iss
+      - name: Upload Installer artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: myapp-installer
+          path: build/innosetup/*.exe
 
   buildDebForLinux:
     runs-on: ubuntu-latest
@@ -56,8 +71,8 @@ jobs:
       - name: Upload DEB artifact
         uses: actions/upload-artifact@v4
         with:
-          name: deb-linux
-          path: build/libs/*.deb
+          name: myapp-deb-linux
+          path: build/jpackage/*.deb
 
   buildRpmForLinux:
     runs-on: ubuntu-latest
@@ -75,8 +90,8 @@ jobs:
       - name: Upload RPM artifact
         uses: actions/upload-artifact@v4
         with:
-          name: rpm-linux
-          path: build/libs/*.rpm
+          name: myapp-rpm-linux
+          path: build/jpackage/*.rpm
 
   buildDmgForMacOS:
     runs-on: macos-latest
@@ -94,11 +109,11 @@ jobs:
       - name: Upload DMG artifact
         uses: actions/upload-artifact@v4
         with:
-          name: dmg-macos
-          path: build/libs/*.dmg
+          name: myapp-dmg-macos
+          path: build/jpackage/*.dmg
 
   release:
-    needs: [buildExeForWindows, buildMsiForWindows, buildDebForLinux, buildRpmForLinux, buildDmgForMacOS]
+    needs: [buildExeForWindows, buildMsiForWindows, buildInnoSetup, buildDebForLinux, buildRpmForLinux, buildDmgForMacOS]
     runs-on: ubuntu-latest
     steps:
       - name: Download all artifacts
