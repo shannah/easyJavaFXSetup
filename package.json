@@ -1,0 +1,32 @@
+{
+    "bin": {"myapp": "jdeploy-bundle/jdeploy.js"},
+    "author": "Steve Hannah",
+    "description": "Test application",
+    "main": "index.js",
+    "preferGlobal": true,
+    "repository": "",
+    "version": "1.0.0",
+    "jdeploy": {
+        "jdk": false,
+        "publishTargets": [{
+            "name": "npm: myapp",
+            "type": "NPM",
+            "url": "myapp"
+        }],
+        "javaVersion": "21",
+        "jar": "build/libs/myapp-1.0.0.jar",
+        "javafx": true,
+        "title": "Myapp"
+    },
+    "dependencies": {
+        "command-exists-promise": "^2.0.2",
+        "node-fetch": "2.6.7",
+        "tar": "^4.4.8",
+        "yauzl": "^2.10.0",
+        "shelljs": "^0.8.4"
+    },
+    "license": "ISC",
+    "name": "jdeploy-easy-javafx-setup",
+    "files": ["jdeploy-bundle"],
+    "scripts": {"test": "echo \"Error: no test specified\" && exit 1"}
+}

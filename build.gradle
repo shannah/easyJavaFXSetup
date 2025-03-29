@@ -165,6 +165,33 @@ tasks.register('buildDmgForMacOS', GradleBuild) {
     tasks = ['jpackage']
 }
 
+tasks.register('buildExecutableJar', Jar) {
+    group = "release"
+    description = "Builds a jar with external dependencies."
+
+    archiveClassifier = ''
+
+    manifest {
+        attributes(
+                'Main-Class': application.mainClass,
+                'Class-Path': configurations.runtimeClasspath.files.collect { "libs/${it.name}" }.join(' ')
+        )
+    }
+
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+
+    from sourceSets.main.output
+
+    doLast {
+        copy {
+            from configurations.runtimeClasspath
+            into "$buildDir/libs/libs"
+        }
+    }
+}
+
+
+
 static def getCurrentYear() {
     return LocalDate.now().format("yyyy")
 }

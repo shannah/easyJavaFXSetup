@@ -42,3 +42,8 @@ build/
 
 /log.json
 /.gradle/
+
+### jDeploy ###
+jdeploy
+jdeploy-bundle
+.jdeploy
